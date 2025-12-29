@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { UserPlus, Mail, Lock, User, Building2, AlertCircle, CheckCircle } from 'lucide-react';
+import { UserPlus, Mail, Lock, AlertCircle, CheckCircle } from 'lucide-react';
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    fullName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    organizationName: '',
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -44,11 +42,7 @@ export default function Register() {
     try {
       const { error: signUpError } = await signUp(
         formData.email, 
-        formData.password,
-        {
-          full_name: formData.fullName,
-          organization_name: formData.organizationName,
-        }
+        formData.password
       );
 
       if (signUpError) {
@@ -104,40 +98,6 @@ export default function Register() {
       )}
 
       <form className="auth-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label className="form-label" htmlFor="fullName">Fullt navn</label>
-          <div className="search-input-wrapper">
-            <User size={18} />
-            <input
-              id="fullName"
-              name="fullName"
-              type="text"
-              className="form-input search-input"
-              placeholder="Ola Nordmann"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="organizationName">Firmanavn</label>
-          <div className="search-input-wrapper">
-            <Building2 size={18} />
-            <input
-              id="organizationName"
-              name="organizationName"
-              type="text"
-              className="form-input search-input"
-              placeholder="Mitt Firma AS"
-              value={formData.organizationName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-
         <div className="form-group">
           <label className="form-label" htmlFor="email">E-post</label>
           <div className="search-input-wrapper">

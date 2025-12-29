@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
-import { Building2, Mail, Phone, MapPin, Hash, ArrowRight, Loader2 } from 'lucide-react';
+import { Building2, Mail, Phone, MapPin, Hash, ArrowRight, Loader2, User } from 'lucide-react';
 import styles from './SetupOrganization.module.css';
 
 export default function SetupOrganization() {
@@ -12,6 +12,7 @@ export default function SetupOrganization() {
   const [error, setError] = useState(null);
   
   const [formData, setFormData] = useState({
+    full_name: user?.user_metadata?.full_name || '',
     name: '',
     email: user?.email || '',
     phone: '',
@@ -30,6 +31,11 @@ export default function SetupOrganization() {
     e.preventDefault();
     setError(null);
 
+    if (!formData.full_name.trim()) {
+      setError('Fullt navn er påkrevd');
+      return;
+    }
+
     if (!formData.name.trim()) {
       setError('Bedriftsnavn er påkrevd');
       return;
@@ -38,6 +44,15 @@ export default function SetupOrganization() {
     setLoading(true);
 
     try {
+      // Oppdater brukerens fulle navn
+      const { error: updateError } = await supabase.auth.updateUser({
+        data: { full_name: formData.full_name }
+      });
+
+      if (updateError) {
+        console.error('Error updating user name:', updateError);
+      }
+
       const { data, error: fnError } = await supabase.rpc('create_organization_with_owner', {
         org_name: formData.name,
         org_email: formData.email || null,
@@ -84,6 +99,23 @@ export default function SetupOrganization() {
 
           <div className={styles.fieldGroup}>
             <label className={styles.label}>
+              <User size={16} />
+              Ditt fulle navn *
+            </label>
+            <input
+              type="text"
+              name="full_name"
+              value={formData.full_name}
+              onChange={handleChange}
+              placeholder="Ola Nordmann"
+              className={styles.input}
+              required
+              autoFocus
+            />
+          </div>
+
+          <div className={styles.fieldGroup}>
+            <label className={styles.label}>
               <Building2 size={16} />
               Bedriftsnavn *
             </label>
@@ -95,7 +127,6 @@ export default function SetupOrganization() {
               placeholder="F.eks. Hansen Bygg AS"
               className={styles.input}
               required
-              autoFocus
             />
           </div>
 

@@ -6,7 +6,7 @@ import {
   CreditCard,
   FileText,
   Link2,
-  Users,
+  User,
   Save,
   CheckCircle,
   AlertCircle,
@@ -17,10 +17,11 @@ import {
 import styles from './Settings.module.css';
 
 const TABS = [
-  { id: 'company', label: 'Bedriftsinformasjon', icon: Building2 },
-  { id: 'bank', label: 'Bankinformasjon', icon: CreditCard },
-  { id: 'invoice', label: 'Fakturainnstillinger', icon: FileText },
-  { id: 'integrations', label: 'Integrasjoner', icon: Link2 },
+  { id: 'profile', label: 'Min profil', icon: User, adminOnly: false },
+  { id: 'company', label: 'Bedriftsinformasjon', icon: Building2, adminOnly: true },
+  { id: 'bank', label: 'Bankinformasjon', icon: CreditCard, adminOnly: true },
+  { id: 'invoice', label: 'Fakturainnstillinger', icon: FileText, adminOnly: true },
+  { id: 'integrations', label: 'Integrasjoner', icon: Link2, adminOnly: true },
 ];
 
 const INTEGRATION_PROVIDERS = [
@@ -33,10 +34,17 @@ const INTEGRATION_PROVIDERS = [
 ];
 
 export default function Settings() {
-  const { profile, organization, setOrganization } = useAuth();
-  const [activeTab, setActiveTab] = useState('company');
+  const { user, profile, organization, setOrganization } = useAuth();
+  const [activeTab, setActiveTab] = useState('profile');
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState(null);
+  const [profileData, setProfileData] = useState({
+    full_name: '',
+    phone: '',
+    address: '',
+    postal_code: '',
+    city: '',
+  });
   const [formData, setFormData] = useState({
     // Company info
     name: '',
@@ -69,6 +77,19 @@ export default function Settings() {
   // Check if user is admin or owner
   const isAdmin = profile?.role === 'admin' || profile?.role === 'owner';
 
+  // Load profile data
+  useEffect(() => {
+    if (profile) {
+      setProfileData({
+        full_name: profile.full_name || '',
+        phone: profile.phone || '',
+        address: profile.address || '',
+        postal_code: profile.postal_code || '',
+        city: profile.city || '',
+      });
+    }
+  }, [profile]);
+
   useEffect(() => {
     if (organization) {
       setFormData({
@@ -97,6 +118,34 @@ export default function Settings() {
       });
     }
   }, [organization]);
+
+  const handleSaveProfile = async () => {
+    setSaving(true);
+    setSaveMessage(null);
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          full_name: profileData.full_name,
+          phone: profileData.phone || null,
+          address: profileData.address || null,
+          postal_code: profileData.postal_code || null,
+          city: profileData.city || null,
+        })
+        .eq('id', user.id);
+
+      if (error) throw error;
+
+      setSaveMessage({ type: 'success', text: 'Profil oppdatert!' });
+      setTimeout(() => setSaveMessage(null), 3000);
+    } catch (error) {
+      console.error('Error saving profile:', error);
+      setSaveMessage({ type: 'error', text: 'Kunne ikke lagre profil. Prøv igjen.' });
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const handleSave = async () => {
     if (!isAdmin) {
@@ -169,16 +218,6 @@ export default function Settings() {
     setFormData({ ...formData, bank_account: formatted });
   };
 
-  if (!isAdmin) {
-    return (
-      <div className={styles.noAccess}>
-        <Shield size={64} />
-        <h2>Ingen tilgang</h2>
-        <p>Du må være administrator eller eier for å se innstillinger.</p>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.container}>
       {/* Header */}
@@ -189,8 +228,8 @@ export default function Settings() {
         </div>
         <button 
           className="btn btn-primary"
-          onClick={handleSave}
-          disabled={saving}
+          onClick={activeTab === 'profile' ? handleSaveProfile : handleSave}
+          disabled={saving || (activeTab !== 'profile' && !isAdmin)}
         >
           <Save size={18} />
           {saving ? 'Lagrer...' : 'Lagre endringer'}
@@ -208,7 +247,7 @@ export default function Settings() {
       <div className={styles.content}>
         {/* Sidebar Navigation */}
         <nav className={styles.sidebar}>
-          {TABS.map(tab => {
+          {TABS.filter(tab => !tab.adminOnly || isAdmin).map(tab => {
             const Icon = tab.icon;
             return (
               <button
@@ -226,6 +265,88 @@ export default function Settings() {
 
         {/* Main Content */}
         <div className={styles.main}>
+          {/* Profile Tab */}
+          {activeTab === 'profile' && (
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>
+                <User size={22} />
+                Min profil
+              </h2>
+              <p className={styles.sectionDesc}>
+                Oppdater din personlige informasjon.
+              </p>
+
+              <div className={styles.formGrid}>
+                <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                  <label className="form-label">E-post</label>
+                  <input
+                    type="email"
+                    className="form-input"
+                    value={user?.email || ''}
+                    disabled
+                    style={{ opacity: 0.6 }}
+                  />
+                  <span className="form-hint">E-post kan ikke endres</span>
+                </div>
+
+                <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+                  <label className="form-label">Fullt navn *</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={profileData.full_name}
+                    onChange={(e) => setProfileData({ ...profileData, full_name: e.target.value })}
+                    placeholder="Ola Nordmann"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Telefon</label>
+                  <input
+                    type="tel"
+                    className="form-input"
+                    value={profileData.phone}
+                    onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
+                    placeholder="+47 123 45 678"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Adresse</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={profileData.address}
+                    onChange={(e) => setProfileData({ ...profileData, address: e.target.value })}
+                    placeholder="Gateadresse 123"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Postnummer</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={profileData.postal_code}
+                    onChange={(e) => setProfileData({ ...profileData, postal_code: e.target.value })}
+                    placeholder="0123"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Sted</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={profileData.city}
+                    onChange={(e) => setProfileData({ ...profileData, city: e.target.value })}
+                    placeholder="Oslo"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Company Info Tab */}
           {activeTab === 'company' && (
             <div className={styles.section}>
@@ -580,8 +701,8 @@ export default function Settings() {
       <div className={styles.mobileSave}>
         <button 
           className="btn btn-primary w-full"
-          onClick={handleSave}
-          disabled={saving}
+          onClick={activeTab === 'profile' ? handleSaveProfile : handleSave}
+          disabled={saving || (activeTab !== 'profile' && !isAdmin)}
         >
           <Save size={18} />
           {saving ? 'Lagrer...' : 'Lagre endringer'}

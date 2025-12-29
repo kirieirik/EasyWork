@@ -10,22 +10,36 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let isMounted = true
+    let hasFetched = false
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!isMounted || hasFetched) return
+      hasFetched = true
+      
       setUser(session?.user ?? null)
       if (session?.user) {
-        fetchProfile(session.user.id)
+        fetchProfile(session.user.id, session.access_token)
       } else {
         setLoading(false)
       }
+    }).catch(err => {
+      console.error('Session error:', err)
+      if (isMounted) setLoading(false)
     })
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        if (!isMounted) return
+        
+        // Skip INITIAL_SESSION as we handle it above
+        if (event === 'INITIAL_SESSION') return
+        
         setUser(session?.user ?? null)
         if (session?.user) {
-          await fetchProfile(session.user.id)
+          await fetchProfile(session.user.id, session.access_token)
         } else {
           setProfile(null)
           setOrganization(null)
@@ -34,65 +48,55 @@ export function AuthProvider({ children }) {
       }
     )
 
-    return () => subscription.unsubscribe()
+    return () => {
+      isMounted = false
+      subscription.unsubscribe()
+    }
   }, [])
 
-  async function fetchProfile(userId) {
-    console.log('Fetching profile for user:', userId)
-    
+  async function fetchProfile(userId, accessToken) {
     try {
-      console.log('Starting Supabase query...')
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/profiles?id=eq.${userId}&select=*`,
+        {
+          headers: {
+            'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${accessToken}`,
+          }
+        }
+      );
       
-      // Wrap query in a timeout
-      const timeoutPromise = new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Query timeout')), 5000)
-      )
-      
-      const queryPromise = supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
+      const profiles = await response.json();
+      const data = profiles?.[0];
 
-      const { data, error } = await Promise.race([queryPromise, timeoutPromise])
-
-      console.log('Profile query result:', data, error)
-
-      if (error) {
-        console.error('Profile error:', error)
+      if (!data) {
         setLoading(false)
         return
       }
 
-      const profileData = data?.[0]
-      
-      if (!profileData) {
-        console.log('No profile found for user')
-        setLoading(false)
-        return
-      }
+      setProfile(data)
 
-      setProfile(profileData)
-
-      // Then fetch organization separately
-      if (profileData?.organization_id) {
-        console.log('Fetching organization:', profileData.organization_id)
+      if (data?.organization_id) {
+        const orgResponse = await fetch(
+          `${import.meta.env.VITE_SUPABASE_URL}/rest/v1/organizations?id=eq.${data.organization_id}&select=*`,
+          {
+            headers: {
+              'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${accessToken}`,
+            }
+          }
+        );
         
-        const orgQueryPromise = supabase
-          .from('organizations')
-          .select('*')
-          .eq('id', profileData.organization_id)
-          
-        const { data: orgData, error: orgError } = await Promise.race([orgQueryPromise, timeoutPromise])
+        const orgs = await orgResponse.json();
 
-        console.log('Organization result:', orgData, orgError)
-
-        if (!orgError && orgData?.[0]) {
-          setOrganization(orgData[0])
+        if (orgs?.[0]) {
+          setOrganization(orgs[0])
         }
       }
+      
+      setLoading(false)
     } catch (error) {
-      console.error('Error fetching profile:', error.message)
-    } finally {
+      console.error('Error fetching profile:', error)
       setLoading(false)
     }
   }
