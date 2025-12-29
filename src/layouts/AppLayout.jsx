@@ -18,7 +18,6 @@ import {
   X,
   Bell,
   Wrench,
-  ChevronDown,
   Package
 } from 'lucide-react';
 
@@ -45,14 +44,12 @@ const mobileNavItems = [
   { name: 'Kunder', href: '/kunder', icon: Users },
   { name: 'Jobber', href: '/jobber', icon: Briefcase },
   { name: 'Timer', href: '/timer', icon: Clock },
-  { name: 'Mer', href: '/innstillinger', icon: Menu },
 ];
 
 export default function AppLayout() {
   const { user, profile, signOut } = useAuth();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const getPageTitle = () => {
     const path = location.pathname;
@@ -137,9 +134,10 @@ export default function AppLayout() {
         </nav>
 
         <div className="sidebar-footer">
-          <div 
+          <NavLink
+            to="/innstillinger"
             className="user-menu"
-            onClick={() => setUserMenuOpen(!userMenuOpen)}
+            onClick={() => setSidebarOpen(false)}
           >
             <div className="user-avatar">
               {getInitials()}
@@ -153,21 +151,15 @@ export default function AppLayout() {
                  profile?.role === 'admin' ? 'Administrator' : 'Ansatt'}
               </div>
             </div>
-            <ChevronDown size={16} />
-          </div>
+          </NavLink>
           
-          {userMenuOpen && (
-            <div style={{ marginTop: '0.5rem' }}>
-              <button 
-                className="nav-item w-full" 
-                onClick={signOut}
-                style={{ color: 'var(--color-danger)' }}
-              >
-                <LogOut size={20} />
-                <span>Logg ut</span>
-              </button>
-            </div>
-          )}
+          <button 
+            className="nav-item logout-btn" 
+            onClick={signOut}
+          >
+            <LogOut size={20} />
+            <span>Logg ut</span>
+          </button>
         </div>
       </aside>
 
@@ -211,6 +203,13 @@ export default function AppLayout() {
               <span>{item.name}</span>
             </NavLink>
           ))}
+          <button
+            className="mobile-nav-item"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <Menu size={20} />
+            <span>Mer</span>
+          </button>
         </div>
       </nav>
     </div>

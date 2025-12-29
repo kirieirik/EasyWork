@@ -37,6 +37,11 @@ export function AuthProvider({ children }) {
         // Skip INITIAL_SESSION as we handle it above
         if (event === 'INITIAL_SESSION') return
         
+        // Set loading true immediately to prevent flash of wrong page
+        if (session?.user) {
+          setLoading(true)
+        }
+        
         setUser(session?.user ?? null)
         if (session?.user) {
           await fetchProfile(session.user.id, session.access_token)

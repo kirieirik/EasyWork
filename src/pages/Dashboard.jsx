@@ -215,38 +215,21 @@ export default function Dashboard() {
             </Link>
           </div>
         ) : (
-          <div className="table-container">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Jobb</th>
-                  <th>Kunde</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentJobs.map((job) => (
-                  <tr key={job.id}>
-                    <td>
-                      <div style={{ fontWeight: 500 }}>{job.title}</div>
-                      {job.description && (
-                        <div className="text-muted truncate" style={{ maxWidth: 200 }}>
-                          {job.description}
-                        </div>
-                      )}
-                    </td>
-                    <td>{job.customer?.name || '-'}</td>
-                    <td>{getStatusBadge(job.status)}</td>
-                    <td>
-                      <Link to={`/jobber/${job.id}`} className="btn btn-ghost btn-sm">
-                        <ArrowRight size={16} />
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="job-list">
+            {recentJobs.map((job) => (
+              <Link to={`/jobber/${job.id}`} key={job.id} className="job-list-item">
+                <div className="job-list-content">
+                  <div className="job-list-title">{job.title}</div>
+                  {job.description && (
+                    <div className="job-list-description">{job.description}</div>
+                  )}
+                  <div className="job-list-customer">{job.customer?.name || '-'}</div>
+                </div>
+                <div className="job-list-status">
+                  {getStatusBadge(job.status)}
+                </div>
+              </Link>
+            ))}
           </div>
         )}
       </div>

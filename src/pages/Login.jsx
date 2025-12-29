@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
 
@@ -9,7 +9,6 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { signIn } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,12 +23,12 @@ export default function Login() {
         } else {
           setError(signInError.message);
         }
-      } else {
-        navigate('/dashboard');
+        setLoading(false);
       }
+      // Don't navigate here - let AuthContext and PublicRoute handle redirect
+      // after profile/organization is loaded
     } catch (err) {
       setError('Noe gikk galt. Prøv igjen.');
-    } finally {
       setLoading(false);
     }
   };

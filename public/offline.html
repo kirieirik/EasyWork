@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyWork - Offline</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f1419;
+      color: #f0f6fc;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+    .container { max-width: 400px; }
+    .icon { font-size: 64px; margin-bottom: 24px; }
+    h1 { font-size: 24px; margin-bottom: 12px; }
+    p { color: #8b949e; margin-bottom: 24px; line-height: 1.6; }
+    button {
+      background: #4f8cff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    button:hover { background: #2563eb; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">📡</div>
+    <h1>Du er offline</h1>
+    <p>Sjekk internettforbindelsen din og prøv igjen.</p>
+    <button onclick="window.location.reload()">Prøv igjen</button>
+  </div>
+</body>
+</html>

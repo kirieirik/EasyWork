@@ -5,6 +5,9 @@ import { useAuth } from './context/AuthContext'
 import AppLayout from './layouts/AppLayout'
 import AuthLayout from './layouts/AuthLayout'
 
+// Components
+import InstallPrompt from './components/InstallPrompt'
+
 // Auth Pages
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -115,7 +118,9 @@ function ComingSoon({ title }) {
 
 function App() {
   return (
-    <Routes>
+    <>
+      <InstallPrompt />
+      <Routes>
       {/* Auth Routes */}
       <Route element={<PublicRoute><AuthLayout /></PublicRoute>}>
         <Route path="/logg-inn" element={<Login />} />
@@ -174,6 +179,7 @@ function App() {
       {/* 404 */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
+    </>
   )
 }
 
