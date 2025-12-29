@@ -1,0 +1,77 @@
+/* ===========================================
+   Customers.module.css - CSS Module for Customers
+   =========================================== */
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.searchWrapper {
+  flex: 1;
+  max-width: 400px;
+}
+
+/* Customer Name Cell */
+.customerName {
+  font-weight: 500;
+}
+
+/* Privatkunde Badge */
+.privateBadge {
+  font-size: var(--font-size-xs);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #a78bfa;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+/* Org Number */
+.orgNumber {
+  font-size: var(--font-size-xs);
+}
+
+/* Contact Links */
+.contactLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Address Cell */
+.addressCell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.addressText {
+  max-width: 200px;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.deleteBtn {
+  color: var(--color-danger);
+}
+
+/* Table Header - Actions Column */
+.actionsColumn {
+  width: 100px;
+}
+
+/* Clickable Row */
+.clickableRow {
+  cursor: pointer;
+}

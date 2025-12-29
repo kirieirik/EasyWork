@@ -1,0 +1,213 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-hero);
+  padding: 1rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+  background: var(--gradient-primary);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.logo svg {
+  color: white;
+}
+
+.header h1 {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.subtitle strong {
+  color: var(--color-primary);
+}
+
+/* Loading */
+.loading {
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading p {
+  color: var(--color-text-secondary);
+  margin: 1rem 0 0;
+}
+
+/* Error State */
+.errorState {
+  text-align: center;
+  padding: 1rem;
+}
+
+.errorState svg {
+  color: var(--color-danger);
+  margin-bottom: 1rem;
+}
+
+.errorState h2 {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.errorState p {
+  color: var(--color-text-secondary);
+  margin: 0 0 1.5rem;
+}
+
+/* Success State */
+.successState {
+  text-align: center;
+  padding: 1rem;
+}
+
+.successState svg {
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.successState h2 {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+  margin: 0 0 0.5rem;
+}
+
+.successState p {
+  color: var(--color-text-secondary);
+  margin: 0 0 1.5rem;
+}
+
+/* Error Message */
+.errorMessage {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  color: #f87171;
+  font-size: var(--font-size-sm);
+  margin-bottom: 1rem;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.formInfo {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0 0 1rem;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  transition: all 0.15s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.15);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Buttons */
+.primaryBtn,
+.submitBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.primaryBtn:hover,
+.submitBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 140, 255, 0.3);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

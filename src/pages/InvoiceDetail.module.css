@@ -1,0 +1,678 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  transition: all 0.15s;
+}
+
+.backButton:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.statusBadge {
+  display: inline-flex;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.headerActions {
+  display: flex;
+  gap: 12px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Form Column */
+.formColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  padding: 20px;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dateRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Customer Selection */
+.customerSelect {
+  position: relative;
+}
+
+.selectedCustomer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px;
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+}
+
+.selectedCustomer p {
+  margin: 4px 0 0 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.changeBtn {
+  padding: 6px 12px;
+  border: none;
+  background: var(--color-bg-primary);
+  color: var(--color-primary);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.changeBtn:hover {
+  background: var(--color-bg-hover);
+}
+
+.customerDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+
+.customerOption {
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.15s;
+}
+
+.customerOption:last-child {
+  border-bottom: none;
+}
+
+.customerOption:hover {
+  background: var(--color-bg-hover);
+}
+
+.customerOption strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.customerOption span {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.customerInfo p {
+  margin: 4px 0;
+  color: var(--color-text-secondary);
+}
+
+/* Lines */
+.linesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.linesHeader .cardTitle {
+  margin: 0;
+}
+
+.desktopLinesTable {
+  display: block;
+}
+
+.noLines {
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: 20px;
+  text-align: center;
+}
+
+.linesTable {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.linesTableHeader {
+  display: grid;
+  grid-template-columns: 2fr 80px 100px 60px 100px 60px;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--color-bg-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.lineRow {
+  display: grid;
+  grid-template-columns: 2fr 80px 100px 60px 100px 60px;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--color-border);
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.lineRow:hover {
+  background: var(--color-bg-hover);
+}
+
+.lineRow input {
+  padding: 6px 8px;
+  font-size: 0.8rem;
+}
+
+.lineSum {
+  font-weight: 600;
+}
+
+.lineActions {
+  display: flex;
+  gap: 4px;
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.iconBtn:hover {
+  background: var(--color-bg-secondary);
+  color: var(--color-primary);
+}
+
+.deleteBtn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-error);
+}
+
+/* Totals */
+.totals {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+  font-size: 0.875rem;
+}
+
+.grandTotal {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+}
+
+.lineFormRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Preview Column */
+.previewColumn {
+  position: sticky;
+  top: 24px;
+}
+
+.previewCard {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.previewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.previewHeader h3 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.preview {
+  padding: 20px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.invoicePreview {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 24px;
+  font-size: 0.75rem;
+  color: #333;
+}
+
+.previewTop {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.previewTop p {
+  margin: 2px 0;
+  color: #666;
+}
+
+.previewOrgName {
+  font-size: 1rem;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.previewInvoiceInfo {
+  text-align: right;
+}
+
+.previewInvoiceInfo h1 {
+  font-size: 1.25rem;
+  color: #333;
+  margin: 0 0 12px 0;
+}
+
+.previewInvoiceInfo p {
+  margin: 4px 0;
+}
+
+.previewCustomer {
+  margin-bottom: 20px;
+}
+
+.previewCustomer p {
+  margin: 4px 0;
+}
+
+.previewTitle {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.previewTitle p {
+  margin: 8px 0 0 0;
+  color: #666;
+}
+
+.previewTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.previewTable th,
+.previewTable td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.previewTable th {
+  background: #f9f9f9;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.previewTable td:last-child,
+.previewTable th:last-child {
+  text-align: right;
+}
+
+.previewTotals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  margin-bottom: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.previewTotals > div {
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+}
+
+.previewGrandTotal {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding-top: 8px;
+  margin-top: 4px;
+  border-top: 1px solid #333;
+}
+
+.previewPayment {
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.previewPayment p {
+  margin: 4px 0;
+}
+
+.previewTerms {
+  font-size: 0.7rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Send Modal */
+.sendModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.sendModalContent svg {
+  color: var(--color-primary);
+  margin-bottom: 16px;
+}
+
+.sendModalContent p {
+  margin: 8px 0;
+}
+
+.sendModalContent strong {
+  font-size: 1.125rem;
+  color: var(--color-text-primary);
+}
+
+.sendModalNote {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  margin-top: 16px !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+  
+  .previewColumn {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+  }
+  
+  .headerActions {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .headerActions .btn {
+    width: 100%;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .dateRow {
+    grid-template-columns: 1fr;
+  }
+  
+  .lineFormRow {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Mobile lines - card view */
+  .linesTable {
+    border: none;
+  }
+  
+  .linesTableHeader {
+    display: none;
+  }
+  
+  .lineRow {
+    display: none;
+  }
+  
+  .desktopLinesTable {
+    display: none;
+  }
+  
+  .previewCard {
+    margin-bottom: 20px;
+  }
+  
+  .preview {
+    max-height: none;
+    padding: 16px;
+  }
+  
+  .invoicePreview {
+    padding: 16px;
+    font-size: 0.7rem;
+  }
+  
+  .previewTop {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .previewInvoiceInfo {
+    text-align: left;
+  }
+  
+  .previewTable th,
+  .previewTable td {
+    padding: 6px 4px;
+    font-size: 0.65rem;
+  }
+}
+
+/* Mobile Lines Cards */
+.mobileLines {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileLines {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .mobileLineCard {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  
+  .mobileLineHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .mobileLineTitle {
+    font-weight: 600;
+    font-size: 0.95rem;
+    flex: 1;
+    line-height: 1.4;
+  }
+  
+  .mobileLineGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .mobileLineItem {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .mobileLineLabel {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.5px;
+  }
+  
+  .mobileLineValue {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .mobileLineFooter {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 12px;
+    margin-top: 12px;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .mobileLineSum {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  
+  /* Editing state */
+  .mobileLineCard.editing {
+    background: var(--color-bg-primary);
+    border-color: var(--color-primary);
+  }
+  
+  .mobileLineCard.editing .mobileLineHeader {
+    flex-direction: row;
+  }
+  
+  .mobileLineCard.editing input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+/* Send Modal Mobile */
+@media (max-width: 640px) {
+  .sendModalContent {
+    padding: 16px;
+  }
+  
+  .sendModalContent strong {
+    font-size: 1rem;
+    word-break: break-all;
+  }
+}
+
+/* Add Line Modal Mobile */
+@media (max-width: 640px) {
+  .lineFormRow {
+    grid-template-columns: 1fr;
+  }
+}

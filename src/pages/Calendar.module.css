@@ -1,0 +1,701 @@
+/* ===========================================
+   Calendar.module.css - CSS Module for Calendar
+   =========================================== */
+
+/* View Toggle */
+.viewToggle {
+  display: flex;
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.viewToggleBtn {
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.viewToggleBtnActive {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  color: white;
+}
+
+/* Month/Year Selector */
+.monthYearSelector {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.selectDropdown {
+  padding: 0.5rem 0.75rem;
+  padding-right: 2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  background-color: #1e293b;
+  color: #e2e8f0;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+
+.selectDropdown option {
+  background-color: #1e293b;
+  color: #e2e8f0;
+}
+
+/* Header - Desktop */
+.headerDesktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.headerTitle {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  min-width: 220px;
+  text-align: center;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* Header - Mobile */
+.headerMobile {
+  margin-bottom: var(--space-lg);
+}
+
+.dayNavigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.dayNavigationCenter {
+  text-align: center;
+}
+
+.dayNavigationWeekday {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dayNavigationDate {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dayNavigationDateToday {
+  color: var(--accent-blue);
+}
+
+/* Week Mini Overview (Mobile) */
+.weekMiniOverview {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+  margin-bottom: var(--space-md);
+}
+
+.weekMiniDay {
+  flex: 1;
+  padding: 0.5rem 0.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: rgba(30, 41, 59, 0.8);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.weekMiniDaySelected {
+  border: none;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+}
+
+.weekMiniDayToday {
+  background: rgba(99, 102, 246, 0.15);
+}
+
+.weekMiniDayName {
+  font-size: 10px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+
+.weekMiniDayNameSelected {
+  color: white;
+}
+
+.weekMiniDayNumber {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+.weekMiniDayNumberSelected {
+  font-weight: 700;
+  color: white;
+}
+
+.weekMiniDayNumberToday {
+  font-weight: 700;
+  color: var(--accent-blue);
+}
+
+.weekMiniEventDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-blue);
+  margin: 0.25rem auto 0;
+}
+
+.weekMiniEventDotSelected {
+  background-color: white;
+}
+
+/* Mobile Action Buttons */
+.mobileActions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.mobileActionsBtn {
+  flex: 1;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.legendDotHoliday {
+  background-color: #ef4444;
+}
+
+/* Day Card (Gradient Border) */
+.dayCard {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 420px;
+}
+
+.dayCardInner {
+  height: 100%;
+  border-radius: calc(var(--radius-lg) - 2px);
+  background-color: var(--bg-secondary);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.dayCardMobile {
+  min-height: 300px;
+}
+
+.dayCardMobileInner {
+  min-height: 296px;
+}
+
+/* Day Card Gradient Variations */
+.gradientDefault {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
+}
+
+.gradientToday {
+  background: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+}
+
+.gradientSelected {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.8) 0%, rgba(168, 85, 247, 0.8) 100%);
+}
+
+.gradientHoliday {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.gradientMobileDefault {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(168, 85, 247, 0.4) 100%);
+}
+
+/* Day Header */
+.dayHeader {
+  text-align: center;
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.dayHeaderWeekday {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.dayHeaderWeekdayHoliday {
+  color: #ef4444;
+}
+
+.dayHeaderNumber {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dayHeaderNumberToday {
+  font-weight: 700;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  color: var(--accent-blue);
+}
+
+.dayHeaderNumberHoliday {
+  color: #ef4444;
+}
+
+/* Holiday Badge */
+.holidayBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+  padding: 0.2rem 0.5rem;
+  background-color: rgba(239, 68, 68, 0.15);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.holidayBadgeText {
+  color: #ef4444;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.holidayBadgeIcon {
+  color: #ef4444;
+}
+
+/* Holiday Banner (Mobile) */
+.holidayBanner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(239, 68, 68, 0.15);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.holidayBannerText {
+  color: #ef4444;
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+}
+
+/* Events Container */
+.eventsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  overflow-y: auto;
+}
+
+.eventsContainerMobile {
+  gap: var(--space-sm);
+}
+
+/* Empty State */
+.emptyState {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  opacity: 0.5;
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.emptyStateMobile {
+  height: 100%;
+  flex-direction: column;
+  padding: var(--space-xl);
+}
+
+.emptyStateIcon {
+  margin-bottom: var(--space-md);
+  opacity: 0.3;
+}
+
+.emptyStateText {
+  margin-bottom: var(--space-md);
+}
+
+/* Event Card */
+.eventCard {
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.eventCard:hover {
+  transform: scale(1.02);
+}
+
+.eventCardMobile {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.eventCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.eventCardHeaderMobile {
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.eventCardLabel {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.eventCardLabelMobile {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.eventCardTitle {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.eventCardTitleMobile {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.eventCardSubtitle {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.eventCardSubtitleMobile {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* Month Grid */
+.monthCard {
+  padding: var(--space-lg);
+}
+
+.monthCardMobile {
+  padding: var(--space-md);
+}
+
+.monthHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.dayHeaders {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.dayHeadersMobile {
+  gap: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.dayHeaderLabel {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 0.5rem;
+}
+
+.dayHeaderLabelMobile {
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 0.25rem;
+}
+
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-sm);
+}
+
+.monthGridMobile {
+  gap: 2px;
+}
+
+/* Month Day Cell */
+.monthDayCell {
+  min-height: 100px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-primary);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.monthDayCellSelected {
+  border: 2px solid var(--accent-blue);
+}
+
+.monthDayCellHoliday {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.monthDayCellToday {
+  background: rgba(99, 102, 246, 0.1);
+}
+
+.monthDayCellOtherMonth {
+  opacity: 0.4;
+}
+
+/* Mobile Month Day Button */
+.monthDayButton {
+  aspect-ratio: 1;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.monthDayButtonSelected {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+}
+
+.monthDayButtonHoliday {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.monthDayButtonToday {
+  background: rgba(99, 102, 246, 0.2);
+}
+
+.monthDayNumber {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.monthDayNumberToday {
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: rgba(99, 102, 246, 0.2);
+  color: var(--accent-blue);
+}
+
+.monthDayNumberHoliday {
+  color: #ef4444;
+}
+
+.monthDayNumberSelected {
+  color: white;
+  font-weight: 700;
+}
+
+.monthDayNumberMobile {
+  font-size: var(--font-size-sm);
+}
+
+/* Month Day Header */
+.monthDayHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.monthDayHolidayTag {
+  font-size: 9px;
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.15);
+  padding: 0.15rem 0.35rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+/* Month Event Preview */
+.monthEventPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.monthEventItem {
+  font-size: 10px;
+  padding: 0.15rem 0.35rem;
+  border-radius: 2px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.monthEventMore {
+  font-size: 10px;
+  color: var(--text-muted);
+  padding-left: 0.35rem;
+}
+
+.monthEventDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--accent-blue);
+}
+
+.monthEventDotSelected {
+  background-color: white;
+}
+
+/* Month Legend */
+.monthLegend {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-primary);
+}
+
+.monthLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.monthLegendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.monthLegendDotHoliday {
+  border-radius: 2px;
+  background-color: rgba(239, 68, 68, 0.5);
+}
+
+/* Week Grid (Desktop) */
+.weekGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-md);
+}
+
+/* Global Empty State */
+.globalEmptyState {
+  margin-top: var(--space-xl);
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--text-secondary);
+}
+
+.globalEmptyStateIcon {
+  margin-bottom: var(--space-md);
+  opacity: 0.5;
+}
+
+.globalEmptyStateTitle {
+  margin-bottom: var(--space-sm);
+}
+
+.globalEmptyStateText {
+  margin-bottom: var(--space-lg);
+  opacity: 0.8;
+}

@@ -1,0 +1,245 @@
+/* ===========================================
+   JobForm.module.css - CSS Module for JobForm
+   =========================================== */
+
+/* Header */
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.backButton {
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+}
+
+/* Error Alert */
+.errorAlert {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Card Sections */
+.card {
+  margin-bottom: var(--space-lg);
+}
+
+.cardTitle {
+  margin-bottom: var(--space-lg);
+}
+
+/* Customer Search */
+.customerSearch {
+  position: relative;
+}
+
+.customerSearchInput {
+  position: relative;
+}
+
+.customerSearchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.customerSearchField {
+  padding-left: 2.5rem !important;
+}
+
+.customerDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-top: 0.25rem;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.customerOption {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 0.15s ease;
+  background-color: var(--color-bg-secondary);
+}
+
+.customerOption:last-child {
+  border-bottom: none;
+}
+
+.customerOption:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.customerOptionName {
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.customerOptionMeta {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  display: flex;
+  gap: 1rem;
+}
+
+.customerOptionMetaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Create New Customer Option */
+.createCustomerOption {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-primary-light);
+  font-weight: 500;
+  transition: background 0.15s ease;
+}
+
+.createCustomerOption:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.25) 100%);
+}
+
+/* Selected Customer Badge */
+.selectedCustomer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-sm);
+}
+
+.selectedCustomerInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.selectedCustomerIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.selectedCustomerName {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.selectedCustomerMeta {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.removeCustomerBtn {
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.removeCustomerBtn:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* Quick Create Modal */
+.quickCreateForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.quickCreateRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+/* Status Select */
+.statusSelect {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.statusOption {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: var(--color-text-secondary);
+}
+
+.statusOptionActive {
+  border-color: transparent;
+}
+
+.statusOptionQuote {
+  background: rgba(148, 163, 184, 0.15);
+  border-color: rgba(148, 163, 184, 0.4);
+  color: #94a3b8;
+}
+
+.statusOptionInProgress {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: #818cf8;
+}
+
+.statusOptionCompleted {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+/* Date Row */
+.dateRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+/* Form Footer */
+.buttonRow {
+  display: flex;
+  gap: var(--space-md);
+}

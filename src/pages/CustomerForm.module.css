@@ -1,0 +1,117 @@
+/* ===========================================
+   CustomerForm.module.css - CSS Module for CustomerForm
+   =========================================== */
+
+/* Header */
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.backButton {
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+}
+
+/* Error Alert */
+.errorAlert {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Card Sections */
+.card {
+  margin-bottom: var(--space-lg);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.cardTitle {
+  margin-bottom: 0;
+}
+
+.cardTitleWithSpace {
+  margin-bottom: var(--space-lg);
+}
+
+/* Privatkunde Toggle */
+.privateToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.privateToggleInactive {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: #8b8b9a;
+}
+
+.privateToggleActive {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.6);
+  color: #a78bfa;
+}
+
+/* Custom Checkbox */
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.checkboxUnchecked {
+  border: 2px solid rgba(139, 92, 246, 0.5);
+  background: transparent;
+}
+
+.checkboxChecked {
+  border: none;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+}
+
+.hiddenInput {
+  display: none;
+}
+
+/* Phone Input */
+.phoneInput {
+  max-width: 250px;
+}
+
+/* Form Footer */
+.formFooter {
+  margin-bottom: var(--space-xl);
+}
+
+.buttonRow {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* Notes */
+.notesGroup {
+  margin-bottom: 0;
+}
