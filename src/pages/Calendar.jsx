@@ -90,29 +90,29 @@ const eventTypes = {
     icon: Briefcase,
     label: 'Jobb',
     color: '#3b82f6',
-    bgColor: 'rgba(59, 130, 246, 0.1)',
-    borderColor: 'rgba(59, 130, 246, 0.3)'
+    bgColor: 'rgba(30, 41, 59, 0.95)',
+    borderColor: '#3b82f6'
   },
   time_entry: {
     icon: Clock,
     label: 'Timer',
     color: '#10b981',
-    bgColor: 'rgba(16, 185, 129, 0.1)',
-    borderColor: 'rgba(16, 185, 129, 0.3)'
+    bgColor: 'rgba(30, 41, 59, 0.95)',
+    borderColor: '#10b981'
   },
   quote: {
     icon: FileText,
     label: 'Tilbud',
     color: '#a855f7',
-    bgColor: 'rgba(168, 85, 247, 0.1)',
-    borderColor: 'rgba(168, 85, 247, 0.3)'
+    bgColor: 'rgba(30, 41, 59, 0.95)',
+    borderColor: '#a855f7'
   },
   vehicle_service: {
     icon: Truck,
     label: 'Kjøretøy',
     color: '#f59e0b',
-    bgColor: 'rgba(245, 158, 11, 0.1)',
-    borderColor: 'rgba(245, 158, 11, 0.3)'
+    bgColor: 'rgba(30, 41, 59, 0.95)',
+    borderColor: '#f59e0b'
   }
 };
 
@@ -170,10 +170,11 @@ export default function Calendar() {
       // Fetch jobs
       const { data: jobs, error: jobsError } = await supabase
         .from('jobs')
-        .select('id, title, scheduled_date, customer:customers(name)')
+        .select('id, title, start_date, customer:customers(name)')
         .eq('organization_id', organization.id)
-        .gte('scheduled_date', format(rangeStart, 'yyyy-MM-dd'))
-        .lte('scheduled_date', format(rangeEnd, 'yyyy-MM-dd'));
+        .not('start_date', 'is', null)
+        .gte('start_date', format(rangeStart, 'yyyy-MM-dd'))
+        .lte('start_date', format(rangeEnd, 'yyyy-MM-dd'));
 
       if (!jobsError && jobs) {
         jobs.forEach(job => {
@@ -181,8 +182,8 @@ export default function Calendar() {
             id: job.id,
             type: 'job',
             title: job.title,
-            subtitle: job.customer?.name,
-            date: parseISO(job.scheduled_date),
+            subtitle: job.customer?.name ? `Kunde: ${job.customer.name}` : null,
+            date: parseISO(job.start_date),
             link: `/jobber/${job.id}`
           });
         });
@@ -202,7 +203,7 @@ export default function Calendar() {
             id: entry.id,
             type: 'time_entry',
             title: `${entry.hours}t registrert`,
-            subtitle: entry.job?.title,
+            subtitle: entry.job?.title ? `Jobb: ${entry.job.title}` : null,
             date: parseISO(entry.date),
             link: `/timer`
           });
@@ -223,7 +224,7 @@ export default function Calendar() {
             id: quote.id,
             type: 'quote',
             title: quote.title || 'Tilbud',
-            subtitle: quote.customer?.name,
+            subtitle: quote.customer?.name ? `Kunde: ${quote.customer.name}` : null,
             date: parseISO(quote.valid_until),
             link: `/tilbud/${quote.id}`
           });
@@ -243,7 +244,7 @@ export default function Calendar() {
             id: service.id,
             type: 'vehicle_service',
             title: service.service_type,
-            subtitle: service.vehicle?.name,
+            subtitle: service.vehicle?.name ? `Kjøretøy: ${service.vehicle.name}` : null,
             date: parseISO(service.service_date),
             link: `/kjoretoy`
           });

@@ -214,10 +214,10 @@ export default function Jobs() {
                 </div>
                 
                 <div className={styles.jobCardMeta}>
-                  {job.scheduled_date && (
+                  {job.start_date && (
                     <div className={styles.jobCardMetaItem}>
                       <Calendar size={12} />
-                      {formatDate(job.scheduled_date)}
+                      {formatDate(job.start_date)}
                     </div>
                   )}
                   {job.address && (
@@ -268,10 +268,10 @@ export default function Jobs() {
                       ) : '-'}
                     </td>
                     <td>
-                      {job.scheduled_date ? (
+                      {job.start_date ? (
                         <div className={styles.dateCell}>
                           <Calendar size={14} className="text-muted" />
-                          {formatDate(job.scheduled_date)}
+                          {formatDate(job.start_date)}
                         </div>
                       ) : '-'}
                     </td>
